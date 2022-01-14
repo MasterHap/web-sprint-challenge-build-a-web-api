@@ -3,7 +3,7 @@ const Acts = require('./actions-model')
 
 async function checkActId(req, res, next) {
     try {
-        const possibleAct = await Acts.findById(req.params.id)
+        const possibleAct = await Acts.get(req.params.id)
         if (possibleAct) {
             req.act = possibleAct
             next()

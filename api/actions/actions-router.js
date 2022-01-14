@@ -1,28 +1,35 @@
-// Write your "actions" router here!
 const express = require('express');
 const Acts = require('./actions-model');
-const { checkActId } = require('./actions-middlware');
-
+const {
+    checkActId
+} = require('./actions-middlware')
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    Acts.find(req.query)
+router.get('/', (req, res) => {
+    Acts.get()
     .then(actions => {
-        res.status(200).json(actions);
+        res.json(actions);
     })
     .catch(err => {
-        next(err)
+        res.status(404).json({ 
+            message:"Could not be retrieved",
+            err: err.message,
+            stack: err.stack,
+      })
     })
 })
 
 router.get('/:id', checkActId, (req, res) => {
-    res.json(req.act)
-})
+    res.json(req.act);
+  })
 
-router
-router
-
-
-
+// router.get('/:id', async (req, res) => {
+//     const findActions = await Acts.get(req.params.id)
+//         if(findActions){
+//             res.json(findActions)
+//         } else {
+//             res.status(404).json({ message: "No project with given id" })
+//         }
+// })
 
 module.exports = router;

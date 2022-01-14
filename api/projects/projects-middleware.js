@@ -3,7 +3,7 @@ const Pro = require('./projects-model')
 
 async function checkProId(req, res, next) {
     try {
-        const possiblePro = await  Pro.findById(req.params.id)
+        const possiblePro = await  Pro.get(req.params.id)
         if (possiblePro) {
             req.pro = possiblePro
             next()
