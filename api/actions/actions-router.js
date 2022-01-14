@@ -5,7 +5,7 @@ const { checkActId } = require('./actions-middlware');
 
 const router = express.Router();
 
-router.get('/api/actions', (req, res, next) => {
+router.get('/', (req, res, next) => {
     Acts.find(req.query)
     .then(actions => {
         res.status(200).json(actions);
@@ -15,8 +15,14 @@ router.get('/api/actions', (req, res, next) => {
     })
 })
 
-router.get('/api/actions:id', checkActId, (req, res) => {
+router.get('/:id', checkActId, (req, res) => {
     res.json(req.act)
 })
+
+router
+router
+
+
+
 
 module.exports = router;
