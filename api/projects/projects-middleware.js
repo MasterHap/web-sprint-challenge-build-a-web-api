@@ -15,4 +15,15 @@ async function checkProId(req, res, next) {
     }
 }
 
-module.exports = { checkProId }
+function validatePro(req, res, next) {
+    if (!req.body.name) {
+      next({ status: 400, message: "Please provide a name" })
+    } else {
+      next()
+    }
+  }
+
+module.exports = { 
+    checkProId,
+    validatePro,
+}
