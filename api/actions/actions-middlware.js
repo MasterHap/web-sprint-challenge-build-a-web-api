@@ -15,4 +15,17 @@ async function checkActId(req, res, next) {
     }
 }
 
-module.exports = { checkActId }
+function validateAct(req, res, next) {
+    const {notes,description,completed,project_id} = req.body
+
+    if (!notes, !description, completed === undefined, !project_id) {
+      next({ status: 400, message: "Please provide missing info" })
+    } else {
+      next()
+    }
+  }
+
+module.exports = { 
+    checkActId, 
+    validateAct
+}
