@@ -16,8 +16,10 @@ async function checkProId(req, res, next) {
 }
 
 function validatePro(req, res, next) {
-    if (!req.body.name) {
-      next({ status: 400, message: "Please provide a name" })
+    const {name,description,completed} = req.body
+
+    if (!name,!description,completed === undefined) {
+      next({ status: 400, message: "Please provide a name/description" })
     } else {
       next()
     }
