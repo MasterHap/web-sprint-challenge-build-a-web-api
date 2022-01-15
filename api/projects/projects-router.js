@@ -37,19 +37,29 @@ router.delete('/:id', checkProId, (req, res, next) => {
       .then(() => {
         res.status(200).json({ message: 'The Project has been nuked' });
       })
-      .catch(error => {
-        next(error)
+      .catch(err => {
+        next(err)
       });
   });
   
-  router.put('/:id', validatePro, checkProId, (req, res, next) => {
+router.put('/:id', validatePro, checkProId, (req, res, next) => {
     Pro.update(req.params.id, req.body)
       .then(pro => {
         res.status(200).json(pro);
       })
-      .catch(error => {
-        next(error)
+      .catch(err => {
+        next(err)
       });
   });
+
+router.get('/:id/actions',async(req, res) => {
+    const {id} = req.params
+    try {
+        const acts = await Pro.getProjectActions(id)
+        res.json(acts)
+    } catch(err){
+        res.json(err)
+    }
+})
 
 module.exports = router;
